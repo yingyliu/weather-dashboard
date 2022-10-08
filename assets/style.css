@@ -1,3 +1,8 @@
+ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
 form .col {
     max-width: none;
 }
@@ -7,13 +12,34 @@ form .col {
     font-size: 20px;
     font-weight: bolder;
 }
-
+/* 
 .form-control {
     width: 15%;
     padding: 10px;
     margin-left: 10px;
-}
+} */
 
 .btn {
     position: static;
 }
+
+.search-history-list {
+    border-top: 0px solid #d2d2d2;
+}
+
+.search-history-list li {
+    background-color: #d2d2d2;
+    color: #7a7a7a;
+    margin: 5px 0;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.current-weather-container {
+    border: 1px solid #d2d2d2;
+}
+
+.days-forecase-list li {
+    background-color: #316dab;
+}
+
