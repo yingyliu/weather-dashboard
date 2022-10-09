@@ -48,6 +48,39 @@ function get5DayForecast() {
         currentTempContentEl.textContent = temperature;
         currentWindContentEl.textContent = wind;
         currentHumidityContentEl.textContent = humidity;
-    
-    })
+
+
+        /* five day forecast area */
+        var daysForecaseList = document.querySelector(".days-corecase-list");
+        var daysForecaseListLiEls = daysForecaseList.querySelectorAll("li");
+        var day2WeatherData = res.list[8];
+        var day3WeatherData = res.list[16];
+        var day4WeatherData = res.list[24];
+        var day5WeatherData = res.list[32];
+        var daysWeartherList = [ todayWeatherData, day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData,];
+
+        for (var i = 0; i < daysWeartherList.length; i++) {
+            var daysForecaseListLiEl = daysForecaseListLiEls[i];
+            var dayWeatherForecaseDay = daysForecaseListLiEl.querySelector(".forecase-day");
+            var dayTempContentEl = daysForecaseListLiEl.querySelector(".temp-content");
+            var dayWindContentEl = daysForecaseListLiEl.querySelector(".wind-content");
+            var dayHumidityContentEl = daysForecaseListLiEl.querySelector(".humidity-content");
+
+            dayWeatherForecaseDay.textContent = moment(daysWeatherList[i].dt_txt).format("MM/D/YYYY");
+            dayTempContentEl.textContent = daysWeatherList[i].main.temp;
+            dayWindContentEl.textContent = daysWeatherList[i].wind.speed;
+            dayHumidityContentEl.textContent = daysForecaseList[i].main.humidity;
+        }
+    });
 }
+
+//search bar for search
+searchBar();
+
+//weather forecast
+get5DayForecast();
+
+//click search bar button
+searchButton.addEventListener("click", function (){
+    searchBar();
+})
