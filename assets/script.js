@@ -23,3 +23,31 @@ function searchBar() {
     }
 }
 
+function get5DayForecast() {
+    fetch( "https://api.openweathermap.org/data/2.5/forecast?lat=33.7849924&lon=-84.3902644&units=imperial&appid=" + apiKey,
+    {method: "GET",})
+    .then(function (res) {
+        return res.json();
+    })
+    .then (function (res) {
+        /* current weather container area*/
+        var currentWeatherContainer = document.querySelector (".current-weather-container");
+        var currentWeatherContainerh5El = currentWeatherContainer.querySelector("h5");
+        var currentTempContentEl = currentWeatherContainer.querySelector(".temp-content");
+        var currentWindContentEl = currentWeatherContainer.querySelector(".wind-content");
+        var currentHumidityContentEl = currentWeatherContainer.querySelector(".humidity-content");
+
+        var todayWeatherData = rest.list[0];
+        var city = res.city.name;
+        var today = moment (todayWeatherData.dt_txt).format("MM/D/YYYY");
+        var temperature = todayWeatherData.wind.speed;
+        var humidity = todayWeatherData.wind.speed;
+        var humidity = todayWeatherData.main.humidity;
+
+        currentWeatherContainerh5El.textContent = city + " " + "(" + today + ")";
+        currentTempContentEl.textContent = temperature;
+        currentWindContentEl.textContent = wind;
+        currentHumidityContentEl.textContent = humidity;
+    
+    })
+}
