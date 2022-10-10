@@ -58,7 +58,7 @@ function get5DayForecast(cityName) {
         var currentHumidityContentEl = document.querySelector(".humidity-content.current-weather");
         var currentIconEl = document.querySelector(".current-icon");
 
-        var todayWeatherData = res.list[0];
+        var todayWeatherData = res.list[0];//today's weather; +0 Day
         var city = res.city.name;
         var today = todayWeatherData.dt_txt;
         var temperature = todayWeatherData.main.temp;
@@ -75,7 +75,7 @@ function get5DayForecast(cityName) {
         /* five day forecast area */
         var daysForecaseList = document.querySelector(".days-forecase-list");
         var daysForecaseListLiEls = document.querySelectorAll("li");
-        var day2WeatherData = res.list[8]; //start time from 15:00; Today! +1 Day
+        var day2WeatherData = res.list[8]; //start time from 15:00; +1 Day
         var day3WeatherData = res.list[16]; // +2 Day
         var day4WeatherData = res.list[24]; // +3 Day
         var day5WeatherData = res.list[32]; // +4 Day

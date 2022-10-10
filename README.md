@@ -11,6 +11,7 @@ This is a weather dashboard helping people to check multipule citites in order t
 - JavaScript
 - Bootstrap
 - Moment js library
+- OpenWeather for API
 - GitHub
 - Terminal
 - Visual Studio Code
