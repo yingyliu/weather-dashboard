@@ -47,6 +47,7 @@ function get5DayForecast(cityName) {
         var currentTempContentEl = currentWeatherContainer.querySelector(".temp-content");
         var currentWindContentEl = currentWeatherContainer.querySelector(".wind-content");
         var currentHumidityContentEl = currentWeatherContainer.querySelector(".humidity-content");
+        var currentIconEl = currentWeatherContainer.querySelector(".current-icon");
 
         var todayWeatherData = res.list[0];
         var city = res.city.name;
@@ -56,43 +57,44 @@ function get5DayForecast(cityName) {
         var wind = todayWeatherData.wind.speed;
         var humidity = todayWeatherData.main.humidity;
 
-        currentWeatherContainerh5El.textContent = city + " " + "(" + today + ")";
+        currentWeatherContainerh5El.textContent = city + " " + "(" + moment(today).format("MM/D/YYYY") + ")";
         currentTempContentEl.textContent = temperature;
         currentWindContentEl.textContent = wind;
         currentHumidityContentEl.textContent = humidity;
+        currentIconEl.setAttribute("src", "https://openweathermap.org/img/w/" + todayWeatherData.weather[0].icon + ".png");
 
 
         /* five day forecast area */
-        var daysForecaseList = document.querySelector(".days-corecase-list");
+        var daysForecaseList = document.querySelector(".days-forecase-list");
         var daysForecaseListLiEls = document.querySelectorAll("li");
         var day2WeatherData = res.list[8];
         var day3WeatherData = res.list[16];
         var day4WeatherData = res.list[24];
         var day5WeatherData = res.list[32];
-        var daysWeatherList = [ todayWeatherData, day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData,];
+        var day6WeatherData = res.list[39]; //no 15:00 in last day, only shows up to 12:00
+        var daysWeatherList = [ day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData, day6WeatherData];
 
         for (var i = 0; i < daysWeatherList.length; i++) {
-            var daysForecaseListLiEl = daysForecaseListLiEls[i];
-            var dayWeatherForecaseDay = document.querySelector(".forecase-day");
-            var dayTempContentEl = document.querySelector(".temp-content");
-            var dayWindContentEl = document.querySelector(".wind-content");
-            var dayHumidityContentEl = document.querySelector(".humidity-content");
+            // var daysForecaseListLiEl = daysForecaseListLiEls[i];
+            var dayWeatherForecaseDay = document.querySelectorAll(".forecase-day")[i];
+            var dayTempContentEl = document.querySelectorAll(".temp-content")[i];
+            var dayWindContentEl = document.querySelectorAll(".wind-content")[i];
+            var dayHumidityContentEl = document.querySelectorAll(".humidity-content")[i];
+            var weatherIconEl = document.querySelectorAll(".icon")[i];
 
-            // dayWeatherForecaseDay.textContent = moment(daysWeatherList[i].dt_txt).format("MM/D/YYYY");
-            dayWeatherForecaseDay.textContent = daysWeatherList[i].dt_txt;
+            console.log(dayWeatherForecaseDay.textContent)
+            dayWeatherForecaseDay.textContent = moment(daysWeatherList[i].dt_txt).format("MM/D/YYYY");
+            // dayWeatherForecaseDay.textContent = daysWeatherList[i].dt_txt;
             dayTempContentEl.textContent = daysWeatherList[i].main.temp;
             dayWindContentEl.textContent = daysWeatherList[i].wind.speed;
-            dayHumidityContentEl.textContent = daysForecaseList[i].main.humidity;
+            dayHumidityContentEl.textContent = daysWeatherList[i].main.humidity;
+            weatherIconEl.setAttribute("src", "https://openweathermap.org/img/w/" + daysWeatherList[i].weather[0].icon + ".png");
         }
     });
 }
 
 //search bar for search
-// searchBar();
 createHistoryButtons();
-
-//weather forecast
-// get5DayForecast();
 
 //click search bar button
 searchButton.addEventListener("click", function (){
