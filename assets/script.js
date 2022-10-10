@@ -22,17 +22,24 @@ function searchBar() {
 
 function createHistoryButtons() {
     var searchHistoryUlEl = document.querySelector(".search-history-list");
+    var searchText = document.querySelector("#search-text");
     searchHistoryUlEl.innerHTML = "";
     for (var i = 0; i < searchHistory.length; i++) {
         var liEl = document.createElement("li");
         liEl.textContent = searchHistory[i];
         searchHistoryUlEl.appendChild(liEl);
+        liEl.addEventListener("click", function(e){
+            var queryStr = e.currentTarget.textContent;
+            searchText.value = queryStr;
+            searchBar()
+        });
     }
     if (searchHistory.length > 0) {
         searchHistoryUlEl.style.borderTopWidth = "1px";
+        if(searchText.value) {
         var displayweatherEl = document.querySelector(".displayweather");
         displayweatherEl.style.display = "block";
-    }
+    }}
 }
 
 function get5DayForecast(cityName) {
@@ -43,13 +50,12 @@ function get5DayForecast(cityName) {
     })
     .then (function (res) {
         console.log(res)
-        /* current weather container area*/
-        var currentWeatherContainer = document.querySelector (".current-weather-container");
-        var currentWeatherContainerh5El = currentWeatherContainer.querySelector("h5");
-        var currentTempContentEl = currentWeatherContainer.querySelector(".temp-content");
-        var currentWindContentEl = currentWeatherContainer.querySelector(".wind-content");
-        var currentHumidityContentEl = currentWeatherContainer.querySelector(".humidity-content");
-        var currentIconEl = currentWeatherContainer.querySelector(".current-icon");
+        /* current weather container area */
+        var currentWeatherContainerh5El = document.querySelector("h5");
+        var currentTempContentEl = document.querySelector(".temp-content.current-weather");
+        var currentWindContentEl = document.querySelector(".wind-content.current-weather");
+        var currentHumidityContentEl = document.querySelector(".humidity-content.current-weather");
+        var currentIconEl = document.querySelector(".current-icon");
 
         var todayWeatherData = res.list[0];
         var city = res.city.name;
@@ -94,6 +100,8 @@ function get5DayForecast(cityName) {
         }
     });
 }
+
+createHistoryButtons();
 
 //click search bar button
 searchButton.addEventListener("click", function (){
