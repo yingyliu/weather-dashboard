@@ -60,7 +60,6 @@ function get5DayForecast(cityName) {
 
         var todayWeatherData = res.list[0];
         var city = res.city.name;
-        // var today = moment (todayWeatherData.dt_txt).format("MM/D/YYYY");
         var today = todayWeatherData.dt_txt;
         var temperature = todayWeatherData.main.temp;
         var wind = todayWeatherData.wind.speed;
@@ -76,15 +75,14 @@ function get5DayForecast(cityName) {
         /* five day forecast area */
         var daysForecaseList = document.querySelector(".days-forecase-list");
         var daysForecaseListLiEls = document.querySelectorAll("li");
-        var day2WeatherData = res.list[8]; //start time from 15:00; Today!
-        var day3WeatherData = res.list[16]; // +1 Day
-        var day4WeatherData = res.list[24]; // +2 Day
-        var day5WeatherData = res.list[32]; // +3 Day
-        var day6WeatherData = res.list[39]; //no 15:00 in fifth day, only shows up to 12:00
+        var day2WeatherData = res.list[8]; //start time from 15:00; Today! +1 Day
+        var day3WeatherData = res.list[16]; // +2 Day
+        var day4WeatherData = res.list[24]; // +3 Day
+        var day5WeatherData = res.list[32]; // +4 Day
+        var day6WeatherData = res.list[39]; //no time from 12:00 to 15:00 in fifth day, details only shows after 15:00
         var daysWeatherList = [ day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData, day6WeatherData];
 
         for (var i = 0; i < daysWeatherList.length; i++) {
-            // var daysForecaseListLiEl = daysForecaseListLiEls[i];
             var dayWeatherForecaseDay = document.querySelectorAll(".forecase-day")[i];
             var dayTempContentEl = document.querySelectorAll(".temp-content")[i];
             var dayWindContentEl = document.querySelectorAll(".wind-content")[i];
@@ -93,7 +91,6 @@ function get5DayForecast(cityName) {
 
             console.log(dayWeatherForecaseDay.textContent)
             dayWeatherForecaseDay.textContent = moment(daysWeatherList[i].dt_txt).format("MM/D/YYYY");
-            // dayWeatherForecaseDay.textContent = daysWeatherList[i].dt_txt;
             dayTempContentEl.textContent = daysWeatherList[i].main.temp;
             dayWindContentEl.textContent = daysWeatherList[i].wind.speed;
             dayHumidityContentEl.textContent = daysWeatherList[i].main.humidity;
