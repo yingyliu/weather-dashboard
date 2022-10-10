@@ -30,6 +30,8 @@ function createHistoryButtons() {
     }
     if (searchHistory.length > 0) {
         searchHistoryUlEl.style.borderTopWidth = "1px";
+        var displayweatherEl = document.querySelector(".displayweather");
+        displayweatherEl.style.display = "block";
     }
 }
 
@@ -92,9 +94,6 @@ function get5DayForecast(cityName) {
         }
     });
 }
-
-//search bar for search
-createHistoryButtons();
 
 //click search bar button
 searchButton.addEventListener("click", function (){
