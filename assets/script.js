@@ -20,6 +20,7 @@ function searchBar() {
     searchText.value = '';
 }
 
+//history recording
 function createHistoryButtons() {
     var searchHistoryUlEl = document.querySelector(".search-history-list");
     var searchText = document.querySelector("#search-text");
@@ -75,11 +76,11 @@ function get5DayForecast(cityName) {
         /* five day forecast area */
         var daysForecaseList = document.querySelector(".days-forecase-list");
         var daysForecaseListLiEls = document.querySelectorAll("li");
-        var day2WeatherData = res.list[8];
-        var day3WeatherData = res.list[16];
-        var day4WeatherData = res.list[24];
-        var day5WeatherData = res.list[32];
-        var day6WeatherData = res.list[39]; //no 15:00 in last day, only shows up to 12:00
+        var day2WeatherData = res.list[8]; //start time from 15:00; Today!
+        var day3WeatherData = res.list[16]; // +1 Day
+        var day4WeatherData = res.list[24]; // +2 Day
+        var day5WeatherData = res.list[32]; // +3 Day
+        var day6WeatherData = res.list[39]; //no 15:00 in fifth day, only shows up to 12:00
         var daysWeatherList = [ day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData, day6WeatherData];
 
         for (var i = 0; i < daysWeatherList.length; i++) {
@@ -101,6 +102,7 @@ function get5DayForecast(cityName) {
     });
 }
 
+//history recording
 createHistoryButtons();
 
 //click search bar button

@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="./assets/style.css"/>
     <title>Weather Dashboard</title>
 </head>
+<!-- Heading bar-->
 <body>
     <header class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4 text-center">Weather Dashboard</h1>
         </div>
     </header>
-
+<!-- Body- search secion -->
     <form class="row mx-0">
         <div class="col-3">
             <label class="citylist" for="exampleFormControlInput1">Search for a City:</label>
@@ -22,6 +23,8 @@
             <button type="button" id="btn-search" class="btn btn-primary btn-sm w-100 mt-2">Search</button>
             <ul class="search-history-list mt-2"></ul>
         </div>
+        <!-- Body- weather display secion -->
+        <!-- current weather -->
         <div class="col-9 displayweather">
             <article class = "current-weather-container py-2 px-2">
                 <div>
@@ -32,6 +35,7 @@
                 <p>Humidity:<span class="humidity-content current-weather"></span>%</p>
                 </div>
             </article>
+            <!-- forecast weather -->
             <article class="mt-3">
                 <h6>5-Day Forecast:</h6>
                 <ul class="days-forecase-list row flex-nowrap">
@@ -86,9 +90,7 @@
     
     </form>
 
-    
-    
-
+    <!-- script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
