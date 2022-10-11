@@ -65,7 +65,7 @@ function get5DayForecast(cityName) {
         var wind = todayWeatherData.wind.speed;
         var humidity = todayWeatherData.main.humidity;
 
-        currentWeatherContainerh5El.textContent = city + " " + "(" + moment(today).format("MM/D/YYYY") + ")";
+        currentWeatherContainerh5El.textContent = city + " " + "(" + moment().format("MM/D/YYYY") + ")";
         currentTempContentEl.textContent = temperature;
         currentWindContentEl.textContent = wind;
         currentHumidityContentEl.textContent = humidity;
@@ -75,11 +75,11 @@ function get5DayForecast(cityName) {
         /* five day forecast area */
         var daysForecaseList = document.querySelector(".days-forecase-list");
         var daysForecaseListLiEls = document.querySelectorAll("li");
-        var day2WeatherData = res.list[8]; //start time from 15:00; +1 Day
+        var day2WeatherData = res.list[8]; // +1 Day
         var day3WeatherData = res.list[16]; // +2 Day
         var day4WeatherData = res.list[24]; // +3 Day
         var day5WeatherData = res.list[32]; // +4 Day
-        var day6WeatherData = res.list[39]; //no time from 12:00 to 15:00 in fifth day, details only shows after 15:00
+        var day6WeatherData = res.list[39]; // +5 Day
         var daysWeatherList = [ day2WeatherData, day3WeatherData, day4WeatherData, day5WeatherData, day6WeatherData];
 
         for (var i = 0; i < daysWeatherList.length; i++) {
@@ -90,7 +90,7 @@ function get5DayForecast(cityName) {
             var weatherIconEl = document.querySelectorAll(".icon")[i];
 
             console.log(dayWeatherForecaseDay.textContent)
-            dayWeatherForecaseDay.textContent = moment(daysWeatherList[i].dt_txt).format("MM/D/YYYY");
+            dayWeatherForecaseDay.textContent = moment().add( i + 1, 'days').format("MM/D/YYYY");
             dayTempContentEl.textContent = daysWeatherList[i].main.temp;
             dayWindContentEl.textContent = daysWeatherList[i].wind.speed;
             dayHumidityContentEl.textContent = daysWeatherList[i].main.humidity;
