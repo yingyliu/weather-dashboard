@@ -52,25 +52,31 @@ function get5DayForecast(cityName) {
     .then (function (res) {
         console.log(res)
         /* current weather container area */
-        var currentWeatherContainerh5El = document.querySelector("h5");
-        var currentTempContentEl = document.querySelector(".temp-content.current-weather");
-        var currentWindContentEl = document.querySelector(".wind-content.current-weather");
-        var currentHumidityContentEl = document.querySelector(".humidity-content.current-weather");
-        var currentIconEl = document.querySelector(".current-icon");
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + apiKey,
+        {method: "GET",})
+        .then(function (res) {
+            return res.json();
+        })
+        .then (function (res) {
+            var currentWeatherContainerh5El = document.querySelector("h5");
+            var currentTempContentEl = document.querySelector(".temp-content.current-weather");
+            var currentWindContentEl = document.querySelector(".wind-content.current-weather");
+            var currentHumidityContentEl = document.querySelector(".humidity-content.current-weather");
+            var currentIconEl = document.querySelector(".current-icon");
+            
+            var todayWeatherData = res;//today's weather; +0 Day
+            var city = res.name;
+            var today = todayWeatherData.dt * 1000;
+            var temperature = todayWeatherData.main.temp;
+            var wind = todayWeatherData.wind.speed;
+            var humidity = todayWeatherData.main.humidity;
 
-        var todayWeatherData = res.list[0];//today's weather; +0 Day
-        var city = res.city.name;
-        var today = todayWeatherData.dt_txt;
-        var temperature = todayWeatherData.main.temp;
-        var wind = todayWeatherData.wind.speed;
-        var humidity = todayWeatherData.main.humidity;
-
-        currentWeatherContainerh5El.textContent = city + " " + "(" + moment().format("MM/D/YYYY") + ")";
-        currentTempContentEl.textContent = temperature;
-        currentWindContentEl.textContent = wind;
-        currentHumidityContentEl.textContent = humidity;
-        currentIconEl.setAttribute("src", "https://openweathermap.org/img/w/" + todayWeatherData.weather[0].icon + ".png");
-
+            currentWeatherContainerh5El.textContent = city + " " + "(" + moment(today).format("MM/D/YYYY") + ")";
+            currentTempContentEl.textContent = temperature;
+            currentWindContentEl.textContent = wind;
+            currentHumidityContentEl.textContent = humidity;
+            currentIconEl.setAttribute("src", "https://openweathermap.org/img/w/" + todayWeatherData.weather[0].icon + ".png");
+        });
 
         /* five day forecast area */
         var daysForecaseList = document.querySelector(".days-forecase-list");
@@ -84,13 +90,14 @@ function get5DayForecast(cityName) {
 
         for (var i = 0; i < daysWeatherList.length; i++) {
             var dayWeatherForecaseDay = document.querySelectorAll(".forecase-day")[i];
-            var dayTempContentEl = document.querySelectorAll(".temp-content")[i];
-            var dayWindContentEl = document.querySelectorAll(".wind-content")[i];
-            var dayHumidityContentEl = document.querySelectorAll(".humidity-content")[i];
+            var dayTempContentEl = document.querySelectorAll(".temp-content.forecase")[i];
+            var dayWindContentEl = document.querySelectorAll(".wind-content.forecase")[i];
+            var dayHumidityContentEl = document.querySelectorAll(".humidity-content.forecase")[i];
             var weatherIconEl = document.querySelectorAll(".icon")[i];
 
-            console.log(dayWeatherForecaseDay.textContent)
-            dayWeatherForecaseDay.textContent = moment().add( i + 1, 'days').format("MM/D/YYYY");
+
+            dayWeatherForecaseDay.textContent = moment(new Date(daysWeatherList[i].dt * 1000)).format("MM/D/YYYY");
+            console.log(daysWeatherList[i]);
             dayTempContentEl.textContent = daysWeatherList[i].main.temp;
             dayWindContentEl.textContent = daysWeatherList[i].wind.speed;
             dayHumidityContentEl.textContent = daysWeatherList[i].main.humidity;
