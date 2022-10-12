@@ -3,7 +3,7 @@
 ![weather-dashboard](/assets/homepage.png)
 
 ## Description
-This is a weather dashboard helping people to check multipule citites in order to plan their trip ahead.
+This is a weather dashboard helping people to check weather at multipule citites, therefore people can plan their trip ahead.
 
 ## Tech used
 - HTML
@@ -17,13 +17,13 @@ This is a weather dashboard helping people to check multipule citites in order t
 - Visual Studio Code
 
 ## Use
-- Step 1: Open this weather dashboard browser.
-- Step 2: Input the local city per user's request.
-- Step 3: Click on the search button then today and forcast weather will be display on the webpage.
+- Step 1: Open this weather dashboard in browser.
+- Step 2: Input the city of interest per user's request.
+- Step 3: Click on the search button, then the weather of today and it's 5 day forecast will be display on the webpage.
 
 ## Learning point
 - I learn how to utilize Bootstrap CDN/Moment js from strach. 
-- I learn how to utilize fetch() function include with API of openweathermap.
+- I learn how to utilize fetch() function to include API of openweathermap.
 - I learn how to utilize info from fetch to select those main requirement I need.
 
 ## Link
